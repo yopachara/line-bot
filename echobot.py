@@ -9,8 +9,8 @@ from searchJSON import search
 
 #search('Pachara')
 
-USERNAME = 'yopachara@gmail.com'
-PASSWORD = '024102124'
+USERNAME = ''
+PASSWORD = ''
 GROUPNAME = 'Evolution CS #13'
 GROUPNAME1 = 'Test'
 MSG = ''
