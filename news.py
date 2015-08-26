@@ -3,14 +3,14 @@
 import feedparser
 from HTMLParser import HTMLParser
 from time import sleep
+import datetime
 import pprint
 import json
+import pickle
 
-link = 'https://www.blognone.com/atom.xml'
-x = feedparser.parse(link)
 data = open('data.json')
 y = json.load(data)
-feedData = {}
+feedData = []
 
 
 class MLStripper(HTMLParser):
@@ -28,12 +28,15 @@ def strip_tags(html):
     return s.get_data()
 
 def getNews():
+    link = 'https://www.blognone.com/atom.xml'
+    x = feedparser.parse(link)
+
     for x.entrie in x.entries:
         #print len(x.entries)
         print x.entrie['guid'].split()[0]
         print x.entrie['link']
         print x.entrie['title'],'\n'
-        #sleep(0.15)
+        sleep(0.15)
         #feedData[id] = {'link': link,'title': title}
 #       feedData = {'id': id,'link': link,'title': title}
         #pprint.pprint(feedData)
@@ -43,23 +46,36 @@ def getNews():
     #print x.entries[0]x.summaryx
 
 def checkNews():
+    link = 'https://www.blognone.com/atom.xml'
+    x = feedparser.parse(link)
     for x.entrie in x.entries:
         #print len(x.entries)
         id = x.entrie['guid'].split()[0]
         link = x.entrie['link']
         title = x.entrie['title'],'\n'
         #sleep(0.15)
-        feedData['result'] = {'id': id,'link': link,'title': title}
-#       feedData = {'id': id,'link': link,'title': title}
-    pprint.pprint(feedData)
+        if id not in feedData:
+            feedData.append(id)
+      # feedData = {'id': id,'link': link,'title': title}
+    #pprint.pprint(feedData)
     with open('data.json', 'w') as outfile:
         json.dump(feedData, outfile)
 
+#def checkUpdate():
 
 
 
 checkNews()
-#getNews()
+getNews()
+#print feedData[1][1]
+#print y
 
-
+while True:
+    checkNews()
+    if max(feedData) not in max(y):
+        print 'yeahhh'
+    else:
+        print datetime.datetime.now(),'News is not update'
+        print feedData[0],'and in data is',y[0]
+        sleep(1)
 
