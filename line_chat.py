@@ -1,7 +1,7 @@
 from line import LineClient, LineGroup, LineContact
 
-USERNAME = 'yopachara@gmail.com'
-PASSWORD = '024102124'
+USERNAME = ''
+PASSWORD = ''
 GROUPNAME = 'Evolution CS #13'
 MSG = 'test'
 
