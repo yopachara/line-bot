@@ -11,7 +11,8 @@ import pickle
 data = open('data.json')
 y = json.load(data)
 feedData = []
-
+#link = 'https://www.blognone.com/atom.xml'
+link = 'https://www4.sit.kmutt.ac.th/student/bsc_cs_feed'
 
 class MLStripper(HTMLParser):
     def __init__(self):
@@ -28,7 +29,6 @@ def strip_tags(html):
     return s.get_data()
 
 def getNews():
-    link = 'https://www.blognone.com/atom.xml'
     x = feedparser.parse(link)
 
     for x.entrie in x.entries:
@@ -73,9 +73,13 @@ getNews()
 while True:
     checkNews()
     if max(feedData) not in max(y):
+        print feedData, y
         print 'yeahhh'
+        sleep(1)
+
     else:
-        print datetime.datetime.now(),'News is not update'
-        print feedData[0],'and in data is',y[0]
+        print datetime.datetime.now(),' News is not update', feedData[0],'and in data is',y[0]
+
+       # print feedData[0],'and in data is',y[0]
         sleep(1)
 
